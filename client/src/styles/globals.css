@@ -134,3 +134,10 @@ select:focus {
   outline: 2px solid rgba(125, 211, 252, 0.3);
   outline-offset: 2px;
 }
+.chip {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 13px;
+  opacity: 0.95;
+}

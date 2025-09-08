@@ -1,6 +1,8 @@
 import { useState } from "react";
 import "./styles/globals.css";
 import TaskList from "./components/TaskList";
+import { useAuth } from "./auth/AuthContext";
+import LoginModal from "./components/LoginModal";
 
 function App() {
   const [theme, setTheme] = useState("dark");
@@ -13,15 +15,50 @@ function App() {
 
   const [calendarOpen, setCalendarOpen] = useState(false);
   const [notesOpen, setNotesOpen] = useState(false);
+  const { user, logout } = useAuth();
+  const [authOpen, setAuthOpen] = useState(false);
+  const [authMode, setAuthMode] = useState("login"); // "login" | "register"
 
   return (
     <div className={`app ${theme}`}>
       <header className="app-header">
-        <div className="greeting">{salutation}</div>
+        <div className="greeting">
+          {salutation}
+          {user ? `, ${user.name}` : ""}
+        </div>
         <div className="spacer" />
+
+        {!user ? (
+          <>
+            <button
+              className="theme-btn"
+              onClick={() => {
+                setAuthMode("login");
+                setAuthOpen(true);
+              }}
+            >
+              Login
+            </button>
+            <button
+              className="theme-btn"
+              onClick={() => {
+                setAuthMode("register");
+                setAuthOpen(true);
+              }}
+            >
+              Register
+            </button>
+          </>
+        ) : (
+          <button className="theme-btn" onClick={logout}>
+            Logout
+          </button>
+        )}
+
         <button
           className="theme-btn"
           onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+          style={{ marginLeft: 8 }}
         >
           {theme === "dark" ? "☀️ Light" : "🌙 Dark"}
         </button>
@@ -92,6 +129,9 @@ function App() {
             />
           </div>
         </div>
+      )}
+      {authOpen && (
+        <LoginModal mode={authMode} onClose={() => setAuthOpen(false)} />
       )}
     </div>
   );
