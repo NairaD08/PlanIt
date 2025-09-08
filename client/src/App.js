@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./styles/globals.css";
+import TaskList from "./components/TaskList";
 
 function App() {
   const [theme, setTheme] = useState("dark");
@@ -44,7 +45,9 @@ function App() {
           Notes
         </section>
         <section className="panel upcoming">Upcoming</section>
-        <section className="panel list">Tasks & Payments List</section>
+        <section className="panel list">
+          <TaskList />
+        </section>
       </main>
 
       {calendarOpen && (

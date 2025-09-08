@@ -118,3 +118,19 @@ body {
   border-left: 1px solid var(--border);
   padding: 16px;
 }
+input,
+button,
+textarea,
+select {
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+  border-radius: 8px;
+  padding: 8px 10px;
+}
+input:focus,
+textarea:focus,
+select:focus {
+  outline: 2px solid rgba(125, 211, 252, 0.3);
+  outline-offset: 2px;
+}
